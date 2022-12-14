@@ -1,13 +1,12 @@
-package Endpoint;
+package de.exentra.codeimpact;
 
-import Repository.InvoiceRepository;
+import de.exentra.codeimpact.repository.InvoiceRepository;
 import de.exentra.codeimpact.model.Invoice;
 
 import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 import java.util.List;
 
 public class InvoiceEndpoint {

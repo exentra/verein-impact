@@ -1,4 +1,4 @@
-package Repository;
+package de.exentra.codeimpact.repository;
 
 import de.exentra.codeimpact.model.Invoice;
 import io.quarkus.mongodb.panache.PanacheMongoRepository;
