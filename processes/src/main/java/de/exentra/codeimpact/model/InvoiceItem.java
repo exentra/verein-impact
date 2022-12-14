@@ -1,4 +1,4 @@
-package main.java.de.exentra.codeimpact.model;
+package de.exentra.codeimpact.model;
 
 public class InvoiceItem {
 
