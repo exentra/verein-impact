@@ -36,9 +36,13 @@
       <version>6.7.2</version>
     </dependency>
     <dependency>
-      <groupId>com.h2database</groupId>
-      <artifactId>h2</artifactId>
-      <version>1.3.176</version>
+      <groupId>org.flowable</groupId>
+      <artifactId>flowable-cmmn-engine</artifactId>
+      <version>6.7.2</version>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-jdbc-postgresql</artifactId>
     </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>

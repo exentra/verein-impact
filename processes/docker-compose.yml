@@ -1,6 +1,16 @@
 version: "3.8"
 
 services:
+  processes-db:
+    image: postgres:12.8
+    container_name: processes-db
+    restart: "no"
+    environment:
+      POSTGRES_DB: processes
+    env_file:
+      - .env
+    ports:
+      - "5435:5432"
   mongo:
     image: mongo:6.0.3
     ports:
