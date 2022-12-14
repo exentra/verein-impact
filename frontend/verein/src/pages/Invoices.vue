@@ -1,6 +1,6 @@
 <template>
   <q-page class="row items-center justify-evenly">
-    <TableComponent :invoices="invoices.invoices"></TableComponent>
+    <TableComponent :invoices="store.invoices"></TableComponent>
   </q-page>
 </template>
 
@@ -8,15 +8,15 @@
 import { Todo, Meta } from 'components/models';
 import { defineComponent, ref } from 'vue';
 import TableComponent from 'src/components/TableComponent.vue';
-import { useInvoicesStore } from 'src/stores/invoices-store';
+import { useInvoicesStore } from 'src/stores/open-invoices-store';
 
 export default defineComponent({
   name: 'IndexPage',
   components: { TableComponent },
-  setup () {
-    const invoices = useInvoicesStore();
+  setup() {
+    const store = useInvoicesStore();
 
-    return { invoices }
+    return { store }
   }
 });
 </script>
