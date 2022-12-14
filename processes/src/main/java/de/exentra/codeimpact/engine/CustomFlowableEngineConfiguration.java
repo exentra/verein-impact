@@ -4,6 +4,9 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Singleton;
 import javax.ws.rs.Produces;
 
+import org.eclipse.microprofile.config.inject.ConfigProperty;
+import org.flowable.cmmn.engine.CmmnEngine;
+import org.flowable.cmmn.engine.CmmnEngineConfiguration;
 import org.flowable.engine.ProcessEngine;
 import org.flowable.engine.ProcessEngineConfiguration;
 import org.flowable.engine.impl.cfg.StandaloneProcessEngineConfiguration;
@@ -17,6 +20,15 @@ public class CustomFlowableEngineConfiguration
 {
 	private static final Logger log = LoggerFactory.getLogger(CustomFlowableEngineConfiguration.class);
 
+	@ConfigProperty(name = "app.engine.postgres.user")
+	String postgresUser;
+
+	@ConfigProperty(name = "app.engine.postgres.password")
+	String postgresPassword;
+
+	@ConfigProperty(name = "app.engine.postgres.url")
+	String postgresUrl;
+
 	@Produces
 	@Startup
 	@ApplicationScoped
@@ -25,12 +37,29 @@ public class CustomFlowableEngineConfiguration
 		log.info("Setting up flowable process engine...");
 
 		ProcessEngineConfiguration cfg = new StandaloneProcessEngineConfiguration()
-				.setJdbcUrl("jdbc:h2:mem:flowable;DB_CLOSE_DELAY=-1")
-				.setJdbcUsername("sa")
-				.setJdbcPassword("")
-				.setJdbcDriver("org.h2.Driver")
+			.setJdbcUrl(postgresUrl)
+			.setJdbcUsername(postgresUser)
+			.setJdbcPassword(postgresPassword)
+			.setJdbcDriver("org.postgresql.Driver")
 				.setDatabaseSchemaUpdate(ProcessEngineConfiguration.DB_SCHEMA_UPDATE_TRUE);
 
 		return cfg.buildProcessEngine();
+	}
+
+	@Produces
+	@Startup
+	@ApplicationScoped
+	public CmmnEngine configureCmmnEngine()
+	{
+		log.info("Setting up flowable cmmn engine");
+
+		CmmnEngineConfiguration cfg = (CmmnEngineConfiguration)CmmnEngineConfiguration.createStandaloneInMemCmmnEngineConfiguration()
+			.setJdbcUrl(postgresUrl)
+			.setJdbcUsername(postgresUser)
+			.setJdbcPassword(postgresPassword)
+			.setJdbcDriver("org.postgresql.Driver")
+			.setDatabaseSchemaUpdate(CmmnEngineConfiguration.DB_SCHEMA_UPDATE_TRUE);
+
+		return cfg.buildCmmnEngine();
 	}
 }
