@@ -11,6 +11,11 @@ const routes: RouteRecordRaw[] = [
     component: () => import('layouts/MainLayout.vue'),
     children: [{ path: '', component: () => import('pages/Invoices.vue') }],
   },
+  {
+    path: '/scan',
+    component: () => import('layouts/MainLayout.vue'),
+    children: [{ path: '', component: () => import('pages/ScanPage.vue') }],
+  },
 
   // Always leave this as last one,
   // but you can also remove it
