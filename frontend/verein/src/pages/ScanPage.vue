@@ -54,17 +54,22 @@ export default defineComponent({
       const base64 = await readFileToBase64(file);
       this.invoice.setImage(base64);
 
-      const res = await fetch(INVOICE_DETECT_URL, {
-        method: 'POST',
-        headers: {
-          'content-type': 'application/json'
-        },
-        body: JSON.stringify({
-          image: base64,
-        }),
-      })
-      const analysis = await res.json()
-      this.invoice.setContents(analysis)
+      try {
+        const res = await fetch(INVOICE_DETECT_URL, {
+          method: 'POST',
+          headers: {
+            'content-type': 'application/json'
+          },
+          body: JSON.stringify({
+            image: base64,
+          }),
+        })
+        const analysis = await res.json()
+        this.invoice.setContents(analysis)
+      } catch(e) {
+        console.error(e)
+        this.invoice.setContents(null)
+      }
 
       this.$router.push('/create')
     }
