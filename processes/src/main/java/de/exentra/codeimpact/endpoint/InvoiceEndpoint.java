@@ -1,4 +1,4 @@
-package de.exentra.codeimpact;
+package de.exentra.codeimpact.endpoint;
 
 import de.exentra.codeimpact.repository.InvoiceRepository;
 import de.exentra.codeimpact.model.Invoice;
