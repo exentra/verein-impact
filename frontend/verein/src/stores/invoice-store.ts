@@ -26,15 +26,11 @@ export interface InvoiceStore {
   contents: InvoiceContents | null,
 }
 
-export const useCounterStore = defineStore('invoice', {
+export const useInvoiceStore = defineStore('invoice', {
   state: (): InvoiceStore => ({
     image: null,
     contents: null,
   }),
-  getters: {
-    image: (state) => state.image,
-    contents: (state) => state.contents,
-  },
   actions: {
     setImage(image: string) {
       this.image = image;
