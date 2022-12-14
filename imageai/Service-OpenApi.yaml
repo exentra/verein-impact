@@ -1,0 +1,82 @@
+openapi: 3.0.1
+info:
+  title: InvoiceConverter
+  version: '0.1'
+paths:
+  /InvoiceOcr:
+    get:
+      tags:
+        - InvoiceOcr
+      operationId: GetStructuredDataOfInvoice
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Invoice'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Invoice'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Invoice'
+components:
+  schemas:
+    Invoice:
+      type: object
+      properties:
+        invoiceNumber:
+          type: string
+          nullable: true
+        date:
+          type: string
+          format: date-time
+        biller:
+          type: string
+          nullable: true
+        customerId:
+          type: string
+          nullable: true
+        invoiceAddress:
+          type: string
+          nullable: true
+        totalBruttoAmount:
+          type: number
+          format: double
+        totalNettoAmount:
+          type: number
+          format: double
+        description:
+          type: string
+          nullable: true
+        invoiceItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/InvoiceItem'
+          nullable: true
+      additionalProperties: false
+    InvoiceItem:
+      type: object
+      properties:
+        position:
+          type: string
+          nullable: true
+        description:
+          type: string
+          nullable: true
+        count:
+          type: number
+          format: double
+        nettoPrice:
+          type: number
+          format: double
+          nullable: true
+        bruttoPrice:
+          type: number
+          format: double
+          nullable: true
+        tax:
+          type: number
+          format: double
+      additionalProperties: false
