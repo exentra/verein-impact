@@ -21,7 +21,7 @@ import java.util.Base64;
 public class GreetingResource {
     // set `<your-endpoint>` and `<your-key>` variables with the values from the Azure portal
     private static final String endpoint = "https://codeimpact-exe-form.cognitiveservices.azure.com/";
-    private static final String key = "7d860354c9654bc7b29f89896c9b4836";
+    private static final String key = "MY_TOKEN";
 
     @POST
     @Produces(MediaType.TEXT_PLAIN)
